@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the AdaptiveScanService class from the adaptive_scan_service library, for the Dart programming language.">
+  <title>AdaptiveScanService class - adaptive_scan_service library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">bearcon_card_app</a></li>
+    <li><a href="../infrastructure_service_adaptive_scan_service/">infrastructure&#47;service&#47;adaptive_scan_service.dart</a></li>
+    <li class="self-crumb">AdaptiveScanService class</li>
+  </ol>
+  <div class="self-name">AdaptiveScanService</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="infrastructure_service_adaptive_scan_service&#47;infrastructure_service_adaptive_scan_service-library-sidebar.html"
+    data-below-sidebar="infrastructure_service_adaptive_scan_service&#47;AdaptiveScanService-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">AdaptiveScanService</span> class 
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>คลาส <a href="../infrastructure_service_adaptive_scan_service/AdaptiveScanService-class.html">AdaptiveScanService</a> บริการอัจฉริยะที่ใช้ประหยัดแบตเตอรี่ด้วยเซนเซอร์</p>
+<p><strong>หน้าที่หลัก (Responsibilities):</strong>
+ควบคุมและเปลี่ยนความถี่ (Frequency) ในการสแกนหา BLE Beacon คอยอ่านค่าจาก Accelerometer ของเครื่อง
+ว่าผู้ใช้กำลังนั่งนิ่งๆ, เดิน, หรือ ขับรถ จากนั้นจะกะจังหวะ (Throttle) ส่งคำสั่งไปสั่งเปิดสแกน</p>
+<p><strong>Business Logic (The "Why"):</strong>
+การเปิดสแกนแบบ High Power/Low Latency ตลอดเวลาจะทำให้แบตสมาร์ทโฟนหมดภายในไม่กี่ชั่วโมง
+เซอร์วิสนี้จึงเป็น "สมองกล" คอยจับ Accelerometer ตลอด (เพราะกินไฟน้อยมาก)
+หากเห็นว่าเดินอยู่ ก็จะลองยิง GPS (GPS กินไฟกลางๆ) ว่าเร็วเกิน 20 กม/ชม ไหม
+ถ้าใช่จะเข้าระบบ HOT ทำให้ลดการกินแบตเตอรี่ได้มหาศาลหากไม่ได้ขับรถ</p>
+</section>
+
+
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="AdaptiveScanService.new" class="callable">
+          <span class="name"><a href="../infrastructure_service_adaptive_scan_service/AdaptiveScanService/AdaptiveScanService.html">AdaptiveScanService</a></span><span class="signature">({<span class="parameter" id="-param-onTriggerScan"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span> <span class="parameter-name">onTriggerScan</span>(<span class="parameter" id="param-scanDuration"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Duration-class.html">Duration</a></span> <span class="parameter-name">scanDuration</span></span>), </span><span class="parameter" id="-param-onStopScan"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/VoidCallback.html">VoidCallback</a></span> <span class="parameter-name">onStopScan</span>, </span><span class="parameter" id="-param-onModeChanged"><span class="type-annotation">void</span> <span class="parameter-name">onModeChanged</span>(<span class="parameter" id="param-mode"><span class="type-annotation"><a href="../infrastructure_service_adaptive_scan_service/AdaptiveScanMode.html">AdaptiveScanMode</a></span> <span class="parameter-name">mode</span></span>)?</span>})</span>
+        </dt>
+        <dd>
+          
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="currentMode" class="property">
+  <span class="name"><a href="../infrastructure_service_adaptive_scan_service/AdaptiveScanService/currentMode.html">currentMode</a></span>
+  <span class="signature">&#8594; <a href="../infrastructure_service_adaptive_scan_service/AdaptiveScanMode.html">AdaptiveScanMode</a></span>
+  
+
+</dt>
+<dd>
+  
+  <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="onModeChanged" class="property">
+  <span class="name"><a href="../infrastructure_service_adaptive_scan_service/AdaptiveScanService/onModeChanged.html">onModeChanged</a></span>
+  <span class="signature">&#8594; void Function<span class="signature">(<span class="parameter" id="param-mode"><span class="type-annotation"><a href="../infrastructure_service_adaptive_scan_service/AdaptiveScanMode.html">AdaptiveScanMode</a></span> <span class="parameter-name">mode</span></span>)</span>?</span>
+  
+
+</dt>
+<dd>
+  Emits whenever the internal AdaptiveScanMode changes.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="onStopScan" class="property">
+  <span class="name"><a href="../infrastructure_service_adaptive_scan_service/AdaptiveScanService/onStopScan.html">onStopScan</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-ui/VoidCallback.html">VoidCallback</a></span>
+  
+
+</dt>
+<dd>
+  ฟังก์ชัน Callback สำหรับบอกเพื่อนบ้านให้ "บังคับปิดกล้องสแกน"
+เกิดขึ้นบ่อยๆ เวลามีการสลับโหมดกะทันหัน (เช่น เดินอยู่ดีๆ แล้วขึ้นรถ)
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="onTriggerScan" class="property">
+  <span class="name"><a href="../infrastructure_service_adaptive_scan_service/AdaptiveScanService/onTriggerScan.html">onTriggerScan</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span> Function<span class="signature">(<span class="parameter" id="param-scanDuration"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Duration-class.html">Duration</a></span> <span class="parameter-name">scanDuration</span></span>)</span></span>
+  
+
+</dt>
+<dd>
+  ฟังก์ชัน Callback สำหรับจุดชนวนบอกเพื่อนบ้าน (BackgroundBleController) ให้ทำการสแกน BLE จริงๆ
+โดยจะรอ <code>scanDuration</code> เป็นระยะเวลาที่กำหนดให้เปิดกล้องสแกน
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="start" class="callable">
+  <span class="name"><a href="../infrastructure_service_adaptive_scan_service/AdaptiveScanService/start.html">start</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Starts the adaptive scanning logic
+  
+
+</dd>
+
+        <dt id="stop" class="callable">
+  <span class="name"><a href="../infrastructure_service_adaptive_scan_service/AdaptiveScanService/stop.html">stop</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  ปิดการทำงานของ Listener และ Timer ทั้งหมดของระบบ (Clean Up)
+  
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">bearcon_card_app</a></li>
+    <li><a href="../infrastructure_service_adaptive_scan_service/">adaptive_scan_service</a></li>
+    <li class="self-crumb">AdaptiveScanService class</li>
+</ol>
+
+    <h5>adaptive_scan_service library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    bearcon_card_app
+      1.0.0+1
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

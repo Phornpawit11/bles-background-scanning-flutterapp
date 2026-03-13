@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the requestBlePermissions method from the HomeController class, for the Dart programming language.">
+  <title>requestBlePermissions method - HomeController class - home.controller library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">bearcon_card_app</a></li>
+    <li><a href="../../presentation_home_controllers_home.controller/">presentation&#47;home&#47;controllers&#47;home.controller.dart</a></li>
+    <li><a href="../../presentation_home_controllers_home.controller/HomeController-class.html">HomeController</a></li>
+    <li class="self-crumb">requestBlePermissions method</li>
+  </ol>
+  <div class="self-name">requestBlePermissions</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="presentation_home_controllers_home.controller&#47;HomeController-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">requestBlePermissions</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+<span class="name ">requestBlePermissions</span>(<wbr>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>ฟังก์ชันหลักสุดโหดสำหรับการขอ Permission แบบเรียงลำดับ (Sequential)</p>
+<p><strong>คืนค่า (Returns):</strong> <code>true</code> หากได้สิทธิ์ครบทุกด่านและพร้อมเริ่ม Service, ส่วน <code>false</code> หากติดค้างหน้าไหนสักหน้า</p>
+<p><strong>Business Logic (The "Why"):</strong>
+ลำดับการขอสิทธิ์เป็นสิ่งสำคัญมากใน Flutter OS:</p>
+<ol>
+<li>Android 13+ จำเป็นต้องขอ Notification ก่อนเป็นอันดับแรก (เพื่อแสดง Foreground Notification)</li>
+<li>ต้องเช็คว่าผู้ใช้เปิด GPS สวิตช์ฮาร์ดแวร์หรือไม่ (Location Services) เพราะถ้าปิด จะมองไม่เห็น BLE เลย</li>
+<li>เมื่อเปิดแล้ว ต้องขอสิทธิ์ Location แบบ <code>WhenInUse</code> ก่อน จากนั้นถึงจะขยับไปขอ <code>Always</code> ได้ (นพโยบาย Android/iOS ล่าสุดบังคับ)</li>
+<li>สุดท้ายจึงเข้าสู่การขอสิทธิ์ของ Bluetooth โดยแยกตาม OS (iOS ขอแค่ก้อนเดียว ส่วน Android 12+ ต้องขอ Scan/Connect แยก)
+หากมีจุดไหนพลาด จะแสดง Dialog หรือ Snackbar แจ้งเตือนสาเหตุอย่างเจาะจง เพื่อให้ UX ไม่สับสน</li>
+</ol>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">Future&lt;bool&gt; requestBlePermissions() async {
+  if (Platform.isAndroid) {
+    &#47;&#47; 🚨 0. ขอสิทธิ์ Notification (สำหรับ Android 13+)
+    PermissionStatus notifStatus = await Permission.notification.request();
+
+    &#47;&#47; ✅ เช็ค Permanently Denied ก่อน
+    if (notifStatus.isPermanentlyDenied) {
+      Get.snackbar(
+        &#39;ถูกปิดกั้นการแจ้งเตือน&#39;,
+        &#39;กรุณาไปที่หน้าตั้งค่า (Settings) เพื่อเปิดสิทธิ์การแจ้งเตือนด้วยตัวเองครับ&#39;,
+        backgroundColor: Colors.orange.withValues(alpha: 0.8),
+        colorText: Colors.white,
+      );
+      await openAppSettings();
+      return false;
+    }
+
+    &#47;&#47; ✅ ค่อยเช็คว่าไม่ได้รับสิทธิ์ธรรมดา
+    if (!notifStatus.isGranted) {
+      Get.snackbar(
+        &#39;Notification Required&#39;,
+        &#39;Please allow notifications to run the background service.&#39;,
+        backgroundColor: Colors.redAccent.withValues(alpha: 0.8),
+        colorText: Colors.white,
+      );
+      return false;
+    }
+  }
+
+  &#47;&#47; 1. Check if GPS hardware is turned ON
+  bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!isLocationServiceEnabled) {
+    bleStatus.value = &#39;off&#39;;
+    Get.snackbar(
+      &#39;Location Required&#39;,
+      &#39;Please turn on GPS&#47;Location Services to scan for Bluetooth devices.&#39;,
+      backgroundColor: Colors.redAccent.withValues(alpha: 0.8),
+      colorText: Colors.white,
+    );
+    return false;
+  }
+
+  &#47;&#47; 2. Request LocationWhenInUse first
+  PermissionStatus locStatus = await Permission.locationWhenInUse.request();
+  if (locStatus.isPermanentlyDenied) {
+    bleStatus.value = &#39;denied&#39;;
+    return false;
+  }
+  if (!locStatus.isGranted) {
+    bleStatus.value = &#39;denied&#39;;
+    _showPermissionError();
+    return false;
+  }
+
+  &#47;&#47; 3. Request LocationAlways (✅ เพิ่มการเช็คผลลัพธ์)
+  PermissionStatus locAlwaysStatus =
+      await Permission.locationAlways.request();
+  if (!locAlwaysStatus.isGranted) {
+    bleStatus.value = &#39;denied&#39;;
+    Get.snackbar(
+      &#39;Background Location Required&#39;,
+      &#39;Please select &quot;Allow all the time&quot; for background tracking.&#39;,
+      backgroundColor: Colors.orange.withValues(alpha: 0.8),
+      colorText: Colors.white,
+    );
+    &#47;&#47; ถ้าไม่ได้สิทธิ์ Always อาจจะบังคับพาไป Settings
+    &#47;&#47; await openAppSettings();
+    return false;
+  }
+
+  &#47;&#47; 4. Request BLE Permissions &amp; Wait for Bluetooth
+  try {
+    Map&lt;Permission, PermissionStatus&gt; bleStatuses;
+
+    if (Platform.isIOS) {
+      &#47;&#47; 🍎 iOS
+      bleStatuses = await [Permission.bluetooth].request();
+    } else {
+      &#47;&#47; 🤖 Android 12+
+      bleStatuses = await [
+        Permission.bluetoothScan,
+        Permission.bluetoothConnect,
+      ].request();
+    }
+
+    if (bleStatuses.values.any((status) =&gt; status.isPermanentlyDenied)) {
+      debugPrint(&quot;[BLE Permission] Permanently Denied: $bleStatuses&quot;);
+      bleStatus.value = &#39;denied&#39;;
+      return false;
+    }
+
+    if (bleStatuses.values
+        .any((status) =&gt; !status.isGranted &amp;&amp; !status.isRestricted)) {
+      debugPrint(&quot;[BLE Permission] Denied: $bleStatuses&quot;);
+      bleStatus.value = &#39;denied&#39;;
+      _showPermissionError();
+      return false;
+    }
+
+    &#47;&#47; รอให้ Bluetooth พร้อมทำงาน
+    await FlutterReactiveBle()
+        .statusStream
+        .where((state) =&gt; state == BleStatus.ready)
+        .first;
+  } catch (e) {
+    bleStatus.value = &#39;off&#39;;
+    Get.snackbar(
+      &#39;Bluetooth Required&#39;,
+      &#39;Please turn on Bluetooth.&#39;,
+      backgroundColor: Colors.redAccent.withValues(alpha: 0.8),
+      colorText: Colors.white,
+    );
+    return false; &#47;&#47; ✅ เพิ่ม return false ตรงนี้
+  }
+
+  return true; &#47;&#47; ✅ ผ่านทุกด่าน! พร้อมสตาร์ท Service
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">bearcon_card_app</a></li>
+    <li><a href="../../presentation_home_controllers_home.controller/">home.controller</a></li>
+    <li><a href="../../presentation_home_controllers_home.controller/HomeController-class.html">HomeController</a></li>
+    <li class="self-crumb">requestBlePermissions method</li>
+</ol>
+
+    <h5>HomeController class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    bearcon_card_app
+      1.0.0+1
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

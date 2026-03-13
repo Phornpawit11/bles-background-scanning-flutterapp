@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the myGlobalTextTheme property from the global_text_theme library, for the Dart programming language.">
+  <title>myGlobalTextTheme property - global_text_theme library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">bearcon_card_app</a></li>
+    <li><a href="../infrastructure_theme_global_text_theme/">infrastructure&#47;theme&#47;global_text_theme.dart</a></li>
+    <li class="self-crumb">myGlobalTextTheme property</li>
+  </ol>
+  <div class="self-name">myGlobalTextTheme</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="infrastructure_theme_global_text_theme&#47;infrastructure_theme_global_text_theme-library-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-top-level-property">myGlobalTextTheme</span> top-level property 
+ 
+</h1></div>
+
+        <section class="multi-line-signature">
+          
+          <a href="https://api.flutter.dev/flutter/material/TextTheme-class.html">TextTheme</a>
+          <span class="name ">myGlobalTextTheme</span>
+          <div class="features"><span class="feature">final</span></div>
+
+        </section>
+        
+
+        
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">final TextTheme myGlobalTextTheme = TextTheme(
+  &#47;&#47; ==========================================
+  &#47;&#47; 1. DISPLAY: ตัวหนังสือขนาดใหญ่พิเศษ
+  &#47;&#47; เหมาะสำหรับ: หน้า Splash Screen หรือโชว์ตัวเลขสถิติสำคัญ (เช่น จำนวนรถทั้งหมด)
+  &#47;&#47; ==========================================
+  displayLarge: TextStyle(fontSize: 57.sp, fontWeight: FontWeight.bold),
+  displayMedium: TextStyle(fontSize: 45.sp, fontWeight: FontWeight.w700),
+  displaySmall: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.w600),
+
+  &#47;&#47; ==========================================
+  &#47;&#47; 2. HEADLINE: หัวข้อหลักของหน้าจอ
+  &#47;&#47; เหมาะสำหรับ: ชื่อหน้า (เช่น &quot;แดชบอร์ด&quot;, &quot;รายการรถยนต์&quot;)
+  &#47;&#47; ==========================================
+  headlineLarge: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
+  headlineMedium: TextStyle(fontSize: 26.sp, fontWeight: FontWeight.w600),
+  headlineSmall: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w600),
+
+  &#47;&#47; ==========================================
+  &#47;&#47; 3. TITLE: หัวข้อย่อย
+  &#47;&#47; เหมาะสำหรับ: ข้อความบน AppBar, ทะเบียนรถใน ListView, ชื่อคนขับ
+  &#47;&#47; ==========================================
+  titleLarge: TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w600,
+  ), &#47;&#47; Default ของ AppBar
+  titleMedium: TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w500,
+  ), &#47;&#47; Default ของ ListTile title
+  titleSmall: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+
+  &#47;&#47; ==========================================
+  &#47;&#47; 4. BODY: เนื้อหาทั่วไปที่ใช้อ่าน
+  &#47;&#47; เหมาะสำหรับ: รายละเอียดสถานะรถ, ข้อความยาวๆ, แจ้งเตือน
+  &#47;&#47; ==========================================
+  bodyLarge: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.normal),
+  bodyMedium: TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.normal,
+  ), &#47;&#47; Default ของ Text() ทั่วไป
+  bodySmall: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.normal),
+
+  &#47;&#47; ==========================================
+  &#47;&#47; 5. LABEL: ข้อความประกอบ &#47; ปุ่ม &#47; คำอธิบายขนาดเล็ก
+  &#47;&#47; เหมาะสำหรับ: ข้อความบนปุ่มกด, วันที่และเวลา (Timestamp), สถานะ (Online&#47;Offline)
+  &#47;&#47; ==========================================
+  labelLarge: TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500,
+  ), &#47;&#47; Default ของปุ่ม (ElevatedButton, TextButton)
+  labelMedium: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
+  labelSmall: TextStyle(
+    fontSize: 11.sp,
+    fontWeight: FontWeight.w400,
+    color: Colors.grey,
+  ),
+);</code></pre>
+</section>
+
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">bearcon_card_app</a></li>
+    <li><a href="../infrastructure_theme_global_text_theme/">global_text_theme</a></li>
+    <li class="self-crumb">myGlobalTextTheme property</li>
+</ol>
+
+    <h5>global_text_theme library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    bearcon_card_app
+      1.0.0+1
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

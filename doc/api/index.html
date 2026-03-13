@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="bearcon_card_app API docs, for the Dart programming language.">
+  <title>bearcon_card_app - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li class="self-crumb">bearcon_card_app package</li>
+  </ol>
+  <div class="self-name">bearcon_card_app</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <h1 id="bearcon-card-app-the-dot-app">Bearcon Card App (the-dot-app)</h1>
+<p>A modern, robust Flutter-based BLE Beacon tracking application designed for continuous background monitoring, adaptive battery saving, and automated location reporting.</p>
+<h2 id="-key-features">🚀 Key Features</h2>
+<ul>
+<li><strong>Device Tag Management</strong>: Register BLE beacons by scanning nearby devices or typing MAC Addresses manually. Save, track, and manage connections dynamically.</li>
+<li><strong>Intelligent Adaptive Scanning</strong>: Utilizes <code>sensors_plus</code> and <code>geolocator</code> to conditionally scan based on user movement, aggressively conserving battery life out in the field.
+<ul>
+<li><strong>HOT Mode (Driving)</strong>: Precise, rapid scanning (15s every 1 minute).</li>
+<li><strong>WARM Mode (Walking)</strong>: Moderate intervals for walking speeds (30s every 3 minutes).</li>
+<li><strong>COLD Mode (Still)</strong>: Rare pings when the device is completely stationary (30s every 10 minutes).</li>
+</ul>
+</li>
+<li><strong>Background Execution Engine</strong>: Reliable isolate background processing via <code>flutter_background_service</code> (Android) and <code>CoreBluetooth</code> state preservation (iOS).</li>
+<li><strong>Internationalization (i18n)</strong>: Fully responsive language translation support (English 🇺🇸 &amp; Thai 🇹🇭) integrated cleanly with GetX and <code>SharedPreferences</code>.</li>
+<li><strong>Dynamic Device Filter</strong>: Easily configurable runtime settings that update background isolate parsing filters dynamically (e.g., scanning only PB713 model devices).</li>
+<li><strong>Clean UI / UX</strong>: A premium, minimalist UI designed for low cognitive load and clear status display with soft shadows and rich color coding.</li>
+</ul>
+<h2 id="-tech-stack">🛠 Tech Stack</h2>
+<ul>
+<li><strong>Framework</strong>: <a href="https://flutter.dev/">Flutter</a> (3.22+)</li>
+<li><strong>State Management, Navigation, &amp; i18n</strong>: <a href="https://pub.dev/packages/get">GetX</a></li>
+<li><strong>BLE Core Engine</strong>: <a href="https://pub.dev/packages/flutter_reactive_ble">flutter_reactive_ble</a></li>
+<li><strong>Background Logic</strong>: <a href="https://pub.dev/packages/flutter_background_service">flutter_background_service</a></li>
+<li><strong>Sensors &amp; Location</strong>: <a href="https://pub.dev/packages/sensors_plus">sensors_plus</a> &amp; <a href="https://pub.dev/packages/geolocator">geolocator</a></li>
+<li><strong>Permissions</strong>: <a href="https://pub.dev/packages/permission_handler">permission_handler</a></li>
+<li><strong>Networking</strong>: <code>dio</code> (with auto-generated JSON serializable request/response objects)</li>
+</ul>
+<h2 id="-architecture-overview">📁 Architecture Overview</h2>
+<p>This project heavily utilizes the GetX pattern paired with Clean Code principles. For an extensive deep dive into features, flow sequence, and iOS vs Android implementation differences, please view the <a href="promps/PROJECT_STRUCTURE.md"><code>promps/PROJECT_STRUCTURE.md</code></a> document.</p>
+<pre class="language-dart"><code>lib/
+├── domain/                                 # Business Logic &amp; Request/Response Models
+├── generated/                              # Auto-generated code (e.g., locales.g.dart)
+├── infrastructure/                         # Core Services, Storage, and Assets
+│   ├── assets/locales/                     # JSON translation files
+│   ├── dio_base/                           # Network Interceptors
+│   ├── helper/                             # Global Helpers (Init, Logger)
+│   ├── navigation/                         # Routing &amp; Bindings
+│   ├── service/                            # Background logic &amp; Data Providers
+│   └── theme/                              # Application Theming (Dark/Light)
+├── presentation/                           # UI Layer &amp; Screen specific controllers
+│   ├── controllers/                        # Global &amp; Shared UI Controllers
+│   ├── devicemodelsetting/                 # Settings Screens
+│   ├── home/                               # Main Application Screens
+│   ├── log/                                # Built-in local SQLite Logger Viewer
+│   └── widgets/                            # Shared, Modern Reusable Components
+└── utils/                                  # iBeacon parsers &amp; string formatting
+</code></pre>
+<h2 id="-getting-started">⚙️ Getting Started</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Flutter SDK (Targets latest stable)</li>
+<li>Android Studio / Xcode</li>
+<li><strong>A specific requirement</strong>: Must use a physical iOS or Android device for proper BLE functionality (the emulator does not support live Bluetooth tracking).</li>
+</ul>
+<h3 id="installation">Installation</h3>
+<ol>
+<li>Clone the repository</li>
+<li>Install dependencies:
+<pre class="language-bash"><code class="language-bash">flutter pub get
+</code></pre>
+</li>
+<li>Run the application:
+<pre class="language-bash"><code class="language-bash">flutter run
+</code></pre>
+</li>
+</ol>
+<h2 id="-development-commands">💻 Development Commands</h2>
+<p>Commonly used commands for development and code generation maintenance.</p>
+<h3 id="-clean-build--code-generation">🧹 Clean Build &amp; Code Generation</h3>
+<p>When model or location translation keys update, re-run generation.</p>
+<pre class="language-bash"><code class="language-bash">flutter pub run build_runner clean
+flutter pub run build_runner build --delete-conflicting-outputs
+</code></pre>
+<h3 id="-build-apk">📦 Build APK</h3>
+<pre class="language-bash"><code class="language-bash">flutter build apk --split-per-abi
+</code></pre>
+<hr>
+<p>Developed with ❤️ for Bearcon.</p>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="config">
+  <span class="name"><a href="config/">config</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="locationsend.request">
+  <span class="name"><a href="domain_request_locationsend.request/">domain/request/locationsend.request</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="locationsend.response">
+  <span class="name"><a href="domain_response_locationsend.response/">domain/response/locationsend.response</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="locales.g">
+  <span class="name"><a href="generated_locales.g/">generated/locales.g</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="dio_interceptor">
+  <span class="name"><a href="infrastructure_dio_base_dio_interceptor/">infrastructure/dio_base/dio_interceptor</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="handle_error">
+  <span class="name"><a href="infrastructure_dio_base_handle_error/">infrastructure/dio_base/handle_error</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="notwork_utils">
+  <span class="name"><a href="infrastructure_dio_base_notwork_utils/">infrastructure/dio_base/notwork_utils</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_initializer.helper">
+  <span class="name"><a href="infrastructure_helper_app_initializer.helper/">infrastructure/helper/app_initializer.helper</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="snackbar.helper">
+  <span class="name"><a href="infrastructure_helper_snackbar.helper/">infrastructure/helper/snackbar.helper</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="controllers_bindings">
+  <span class="name"><a href="infrastructure_navigation_bindings_controllers_controllers_bindings/">infrastructure/navigation/bindings/controllers/controllers_bindings</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="devicemodelsetting.controller.binding">
+  <span class="name"><a href="infrastructure_navigation_bindings_controllers_devicemodelsetting.controller.binding/">infrastructure/navigation/bindings/controllers/devicemodelsetting.controller.binding</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="home.controller.binding">
+  <span class="name"><a href="infrastructure_navigation_bindings_controllers_home.controller.binding/">infrastructure/navigation/bindings/controllers/home.controller.binding</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="loading.controller.binding">
+  <span class="name"><a href="infrastructure_navigation_bindings_controllers_loading.controller.binding/">infrastructure/navigation/bindings/controllers/loading.controller.binding</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="log.controller.binding">
+  <span class="name"><a href="infrastructure_navigation_bindings_controllers_log.controller.binding/">infrastructure/navigation/bindings/controllers/log.controller.binding</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="navigation">
+  <span class="name"><a href="infrastructure_navigation_navigation/">infrastructure/navigation/navigation</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="routes">
+  <span class="name"><a href="infrastructure_navigation_routes/">infrastructure/navigation/routes</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="adaptive_scan_service">
+  <span class="name"><a href="infrastructure_service_adaptive_scan_service/">infrastructure/service/adaptive_scan_service</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="background_ble_service">
+  <span class="name"><a href="infrastructure_service_background_ble_service/">infrastructure/service/background_ble_service</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="logger_service">
+  <span class="name"><a href="infrastructure_service_logger_service/">infrastructure/service/logger_service</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="thedot.service">
+  <span class="name"><a href="infrastructure_service_thedot.service/">infrastructure/service/thedot.service</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="app_theme">
+  <span class="name"><a href="infrastructure_theme_app_theme/">infrastructure/theme/app_theme</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="global_text_theme">
+  <span class="name"><a href="infrastructure_theme_global_text_theme/">infrastructure/theme/global_text_theme</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="theme.controller">
+  <span class="name"><a href="infrastructure_theme_theme.controller/">infrastructure/theme/theme.controller</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="main">
+  <span class="name"><a href="main/">main</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="main.app">
+  <span class="name"><a href="main.app/">main.app</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="main.dev">
+  <span class="name"><a href="main.dev/">main.dev</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="main.local">
+  <span class="name"><a href="main.local/">main.local</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="background_ble.controller">
+  <span class="name"><a href="presentation_controllers_background_ble.controller/">presentation/controllers/background_ble.controller</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="language.controller">
+  <span class="name"><a href="presentation_controllers_language.controller/">presentation/controllers/language.controller</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="scan_mode.controller">
+  <span class="name"><a href="presentation_controllers_scan_mode.controller/">presentation/controllers/scan_mode.controller</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="devicemodelsetting.controller">
+  <span class="name"><a href="presentation_devicemodelsetting_controllers_devicemodelsetting.controller/">presentation/devicemodelsetting/controllers/devicemodelsetting.controller</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="devicemodelsetting.screen">
+  <span class="name"><a href="presentation_devicemodelsetting_devicemodelsetting.screen/">presentation/devicemodelsetting/devicemodelsetting.screen</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="home.controller">
+  <span class="name"><a href="presentation_home_controllers_home.controller/">presentation/home/controllers/home.controller</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="home.screen">
+  <span class="name"><a href="presentation_home_home.screen/">presentation/home/home.screen</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="add_tag_section">
+  <span class="name"><a href="presentation_home_widgets_add_tag_section/">presentation/home/widgets/add_tag_section</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="background_service_toggle">
+  <span class="name"><a href="presentation_home_widgets_background_service_toggle/">presentation/home/widgets/background_service_toggle</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="bluetooth_permission_gate">
+  <span class="name"><a href="presentation_home_widgets_bluetooth_permission_gate/">presentation/home/widgets/bluetooth_permission_gate</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="confirm_delete_dialog">
+  <span class="name"><a href="presentation_home_widgets_confirm_delete_dialog/">presentation/home/widgets/confirm_delete_dialog</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="home_drawer">
+  <span class="name"><a href="presentation_home_widgets_home_drawer/">presentation/home/widgets/home_drawer</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="language_dialog">
+  <span class="name"><a href="presentation_home_widgets_language_dialog/">presentation/home/widgets/language_dialog</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="scan_mode_badge">
+  <span class="name"><a href="presentation_home_widgets_scan_mode_badge/">presentation/home/widgets/scan_mode_badge</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="tag_list">
+  <span class="name"><a href="presentation_home_widgets_tag_list/">presentation/home/widgets/tag_list</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="loading.controller">
+  <span class="name"><a href="presentation_loading_controllers_loading.controller/">presentation/loading/controllers/loading.controller</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="loading.screen">
+  <span class="name"><a href="presentation_loading_loading.screen/">presentation/loading/loading.screen</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="log.controller">
+  <span class="name"><a href="presentation_log_controllers_log.controller/">presentation/log/controllers/log.controller</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="log.screen">
+  <span class="name"><a href="presentation_log_log.screen/">presentation/log/log.screen</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="screens">
+  <span class="name"><a href="presentation_screens/">presentation/screens</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="tag_card_item">
+  <span class="name"><a href="presentation_widgets_tag_card_item/">presentation/widgets/tag_card_item</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="bgservice.key">
+  <span class="name"><a href="utils_bgservice.key/">utils/bgservice.key</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="dio.key">
+  <span class="name"><a href="utils_dio.key/">utils/dio.key</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="ibeacon_parser">
+  <span class="name"><a href="utils_ibeacon_parser/">utils/ibeacon_parser</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+        </dl>
+      </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li class="self-crumb">bearcon_card_app package</li>
+</ol>
+
+    <h5 class="hidden-xs"><span class="package-name">bearcon_card_app</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="config/">config</a></li>
+      <li><a href="domain_request_locationsend.request/">domain/request/locationsend.request</a></li>
+      <li><a href="domain_response_locationsend.response/">domain/response/locationsend.response</a></li>
+      <li><a href="generated_locales.g/">generated/locales.g</a></li>
+      <li><a href="infrastructure_dio_base_dio_interceptor/">infrastructure/dio_base/dio_interceptor</a></li>
+      <li><a href="infrastructure_dio_base_handle_error/">infrastructure/dio_base/handle_error</a></li>
+      <li><a href="infrastructure_dio_base_notwork_utils/">infrastructure/dio_base/notwork_utils</a></li>
+      <li><a href="infrastructure_helper_app_initializer.helper/">infrastructure/helper/app_initializer.helper</a></li>
+      <li><a href="infrastructure_helper_snackbar.helper/">infrastructure/helper/snackbar.helper</a></li>
+      <li><a href="infrastructure_navigation_bindings_controllers_controllers_bindings/">infrastructure/navigation/bindings/controllers/controllers_bindings</a></li>
+      <li><a href="infrastructure_navigation_bindings_controllers_devicemodelsetting.controller.binding/">infrastructure/navigation/bindings/controllers/devicemodelsetting.controller.binding</a></li>
+      <li><a href="infrastructure_navigation_bindings_controllers_home.controller.binding/">infrastructure/navigation/bindings/controllers/home.controller.binding</a></li>
+      <li><a href="infrastructure_navigation_bindings_controllers_loading.controller.binding/">infrastructure/navigation/bindings/controllers/loading.controller.binding</a></li>
+      <li><a href="infrastructure_navigation_bindings_controllers_log.controller.binding/">infrastructure/navigation/bindings/controllers/log.controller.binding</a></li>
+      <li><a href="infrastructure_navigation_navigation/">infrastructure/navigation/navigation</a></li>
+      <li><a href="infrastructure_navigation_routes/">infrastructure/navigation/routes</a></li>
+      <li><a href="infrastructure_service_adaptive_scan_service/">infrastructure/service/adaptive_scan_service</a></li>
+      <li><a href="infrastructure_service_background_ble_service/">infrastructure/service/background_ble_service</a></li>
+      <li><a href="infrastructure_service_logger_service/">infrastructure/service/logger_service</a></li>
+      <li><a href="infrastructure_service_thedot.service/">infrastructure/service/thedot.service</a></li>
+      <li><a href="infrastructure_theme_app_theme/">infrastructure/theme/app_theme</a></li>
+      <li><a href="infrastructure_theme_global_text_theme/">infrastructure/theme/global_text_theme</a></li>
+      <li><a href="infrastructure_theme_theme.controller/">infrastructure/theme/theme.controller</a></li>
+      <li><a href="main/">main</a></li>
+      <li><a href="main.app/">main.app</a></li>
+      <li><a href="main.dev/">main.dev</a></li>
+      <li><a href="main.local/">main.local</a></li>
+      <li><a href="presentation_controllers_background_ble.controller/">presentation/controllers/background_ble.controller</a></li>
+      <li><a href="presentation_controllers_language.controller/">presentation/controllers/language.controller</a></li>
+      <li><a href="presentation_controllers_scan_mode.controller/">presentation/controllers/scan_mode.controller</a></li>
+      <li><a href="presentation_devicemodelsetting_controllers_devicemodelsetting.controller/">presentation/devicemodelsetting/controllers/devicemodelsetting.controller</a></li>
+      <li><a href="presentation_devicemodelsetting_devicemodelsetting.screen/">presentation/devicemodelsetting/devicemodelsetting.screen</a></li>
+      <li><a href="presentation_home_controllers_home.controller/">presentation/home/controllers/home.controller</a></li>
+      <li><a href="presentation_home_home.screen/">presentation/home/home.screen</a></li>
+      <li><a href="presentation_home_widgets_add_tag_section/">presentation/home/widgets/add_tag_section</a></li>
+      <li><a href="presentation_home_widgets_background_service_toggle/">presentation/home/widgets/background_service_toggle</a></li>
+      <li><a href="presentation_home_widgets_bluetooth_permission_gate/">presentation/home/widgets/bluetooth_permission_gate</a></li>
+      <li><a href="presentation_home_widgets_confirm_delete_dialog/">presentation/home/widgets/confirm_delete_dialog</a></li>
+      <li><a href="presentation_home_widgets_home_drawer/">presentation/home/widgets/home_drawer</a></li>
+      <li><a href="presentation_home_widgets_language_dialog/">presentation/home/widgets/language_dialog</a></li>
+      <li><a href="presentation_home_widgets_scan_mode_badge/">presentation/home/widgets/scan_mode_badge</a></li>
+      <li><a href="presentation_home_widgets_tag_list/">presentation/home/widgets/tag_list</a></li>
+      <li><a href="presentation_loading_controllers_loading.controller/">presentation/loading/controllers/loading.controller</a></li>
+      <li><a href="presentation_loading_loading.screen/">presentation/loading/loading.screen</a></li>
+      <li><a href="presentation_log_controllers_log.controller/">presentation/log/controllers/log.controller</a></li>
+      <li><a href="presentation_log_log.screen/">presentation/log/log.screen</a></li>
+      <li><a href="presentation_screens/">presentation/screens</a></li>
+      <li><a href="presentation_widgets_tag_card_item/">presentation/widgets/tag_card_item</a></li>
+      <li><a href="utils_bgservice.key/">utils/bgservice.key</a></li>
+      <li><a href="utils_dio.key/">utils/dio.key</a></li>
+      <li><a href="utils_ibeacon_parser/">utils/ibeacon_parser</a></li>
+</ol>
+
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+</main>
+<footer>
+  <span class="no-break">
+    bearcon_card_app
+      1.0.0+1
+  </span>
+  
+</footer>
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

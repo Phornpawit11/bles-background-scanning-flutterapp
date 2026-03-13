@@ -1,0 +1,90 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+.env
+# The .vscode/ directory contains internal settings for Visual Studio Code.
+# It's better to exclude it from version control to prevent conflicts between different users.
+.vscode/
+
+
+# Flutter/Dart related
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+__404_is_fine_install_flutter/
+build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android related
+**/android/**/generated/
+**/android/app/src/main/res/drawable-*/
+**/android/app/src/main/res/mipmap-*/
+**/android/app/src/main/res/values/*.xml
+**/android/local.properties
+**/android/key.properties
+**/android/bundle
+**/android/app_bundle
+**/android/app/*.apk
+**/android/app/*.aab
+**/android/app/*.gz
+
+# iOS/Mac related
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/App.framework
+**/ios/Flutter/App.podspec
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.[h,m]
+**/ios/Pods/
+**/ios/.generated/
+**/macos/Flutter/ephemeral/
+**/macos/Pods/
+**/macos/GeneratedPluginRegistrant.swift
+
+# Windows related
+**/windows/flutter/ephemeral/
+**/windows/flutter/generated_plugin_registrant.h
+**/windows/flutter/generated_plugin_registrant.cc
+**/windows/cmake-build-*/
+**/windows/out/
+
+# Linux related
+**/linux/flutter/ephemeral/
+**/linux/flutter/generated_plugin_registrant.h
+**/linux/linux/generated_plugin_registrant.cc
+
+# Web related
+
+# Coverage related
+coverage/
+
+
+# Exceptions to above rules
+!**/android/app/src/main/res/values/strings.xml
+!**/android/app/src/main/res/values/styles.xml
